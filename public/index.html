@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>FOODTRIP</title>
+  <!-- <documentation at http://demos.jquerymobile.com/1.4.1/ > -->
+
+  <link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script src="/javascripts/index.js"></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
+
+</head>
+
+<body>
+
+  <!-- Start of  HOME page ------------------------------------------------------------------>
+    <!-- In this page, it will show the main page -->
+    <div data-role="page" id="home">
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>Let's go on a FOOD TRIP</h1>
+      <div data-role="navbar" data-theme='b'>
+        <ul>
+            <li><a href="#Home">Home Page</a></li>
+            <li><a href="#ListAll">Must Visit Restaurant</a></li>
+            <li><a href="#Load">Add Restaurant to Visit</a></li>
+        </ul>
+      </div><!-- /navbar -->
+    </div>
+
+    <!--   page content -->
+    <div data-role="content" data-theme='b'>
+      <div class="newFont">
+        <h2 class = "myHeader"> Welcome!</h2>
+        <img class="center" id="plateimage" src="./images/plate.png" alt="picture of a plate">
+      </div>
+    </div>
+
+    <!--  page footer -->
+    <div data-role="footer" data-theme='b'>
+      <h1>Copyright 2022 by Hannah Pedro</h1>
+    </div>
+  </div>
+  <!-- End of  HOME page ------------------------------------------------------------------>
+
+<!-- Start of  MUST VISIT page ------------------------------------------------------------------>
+<!-- This page will list all the must visit restaurants and to sort them by name and price range -->
+<div data-role="page" id="ListAll">
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>Must Visit Restaurants</h1>
+      <div data-role="navbar" data-theme='b'>
+        <ul>
+            <li><a href="#home">Home Page</a></li>
+            <li><a href="#ListAll">Must Visit Restaurant</a></li>
+            <li><a href="#Load">Add Restaurant to Visit</a></li>
+        </ul>
+      </div><!-- /navbar -->
+
+    </div>
+    <!--   page content -->
+    <div data-role="content" data-theme='e'>
+      <p>Must Visit Restaurants</p>
+      <div id="mustVisitList">
+      </div>
+
+      <input type="button" value="Sort by Name" id="buttonSortName" data-inline="true" />
+      <input type="button" value="Sort by Price Range" id="buttonSortPriceRange" data-inline="true" />
+    </div>
+
+
+    <!--   page footer -->
+    <div data-role="footer" data-theme='b'>
+      <h1>Copyright 2022 by Hannah Pedro</h1>
+    </div>
+  </div>
+  </div>
+  <!-- End of  MUST VISIT page ------------------------------------------------------------------>
+
+ <!-- Start of  ADD page ------------------------------------------------------------------>
+  <!--This Add page, user can add restaurant information such as the name, location, cuisine and price range 
+It will contain list of all the restaurants -->
+ <div data-role="page" id="Load">
+    <!--  page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>Add Restaurant to Visit</h1>
+      <div data-role="navbar" data-theme='b'>
+        <ul>
+          <li><a href="#home">Home Page</a></li>
+          <li><a href="#ListAll">Must Visit Restaurant</a></li>
+          <li><a href="#Load">Add Restaurant to Visit</a></li>
+        </ul>
+      </div><!-- /navbar -->
+
+    </div>
+
+    <!-- page content -->
+  
+    <div data-role="content" data-theme='c'>
+      <h2>Enter the restaurant information</h2>
+      Enter the name <br />
+      <input type="text" value="" id="name" />
+      Enter the city<br />
+      <input type="text" value="" id="city" />
+      Enter the state <br />
+      <input type="text" value="" id="state" />
+      Enter the website <br />
+      <input type = "text" value ="" id = "URL" />
+      
+        <div class="ui-field-contain1">
+          <label for="select-cuisine">Select the cuisine</label>
+          <select name="select-cuisine" id="select-cuisine">
+            <option value="select">Select one</option>
+            <option value="american">American</option>
+            <option value="italian">Italian </option>
+            <option value="asian">Asian</option>
+            <option value="mediteranian">Mediteranian</option>
+            <option value="indian">Indian</option>
+            <option value="european">European</option>
+            <option value="spanish">Spanish</option>
+            <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div class="ui-field-contain2">
+            <label for="select-priceRange">Select the Price Range</label>
+            <select name="select-priceRange" id="select-priceRange">
+                <option value="select">Select one</option>
+                <option value="$">$</option>
+                <option value="$$">$$</option>
+                <option value="$$$">$$$</option>
+                <option value="$$$$">$$$$</option>
+            </select>
+        </div>
+    
+      <input type="button" value="Add restaurant" id="buttonAdd" data-inline="true" />
+      <input type="button" value="Clear Data" id="buttonClear" data-inline="true" />
+    </div>
+
+    
+    <!--   page footer -->
+    <div data-role="footer" data-theme='b'>
+      <h1>Copyright 2022 by Hannah Pedro</h1>
+    </div>
+  </div>
+  <!-- End of  ADD page ------------------------------------------------------------------>
+
+
+<!-- Start of  DETAILS page ------------------------------------------------------------------>
+<!-- This page will help the user to be able to try something new if they have trouble deciding what to eat next -->
+<div data-role="page" id="details">
+  <!--   page header -->
+  <div data-role="header" data-theme='a'>
+    <h1>More About the Restaurant</h1>
+    <div data-role="navbar" data-theme='b'>
+      <ul>
+        <li><a href="#home">Home Page</a></li>
+        <li><a href="#ListAll">Must Visit Restaurant</a></li>
+        <li><a href="#Load">Add Restaurant to Visit</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div>
+
+  <!--  content -->
+  <div data-role="content" data-theme='b'>
+    <h3>About the Restaurant</h3>
+      <!-- <p>This is where the restaurant's li info !!!!</p> -->
+      <!-- <p id="someID"></p> -->
+      <p id="oneName"></p>
+      <p id="oneCity"></p>
+      <p id="oneState"></p>
+      <p id="oneCuisine"></p>
+      <p id="onePrice"></p>
+      <p id="oneURL" hidden></p>
+      <form id = "URLform">
+      <input type="submit" value="Website" id="URL" />
+      </form>
+  </div>
+
+  <!--    footer -->
+  <div data-role="footer" data-theme='b'>
+    <h1>Copyright 2022 by Hannah Pedro</h1>
+  </div>
+
+</div>
+<!-- END OF DECIDE page --------------------------------------------------------------------------->
+
+</body>
+
+</html>
+
+<!-- Project Requirement -->
+<!-- In this project, the theme is to have a food trip around the US. It will be useful to someone who
+enjoys listing the restaurants they've been and should try out next. As some has trouble deciding where to eat next,
+I will generate a game in order to help someone pick a place to eat and satisfy their cravings.  -->
