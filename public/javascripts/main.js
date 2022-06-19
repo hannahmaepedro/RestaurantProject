@@ -1,5 +1,5 @@
 // creating data to store the object
-let serverArray = [];
+let restaurantArray = [];
 
 //define a constructor to create restaurant object
 let RestaurantObject = function (pName, pCity, pState, pURL, pCuisine, pPrice) {
@@ -67,13 +67,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.getElementById("buttonSortName").addEventListener("click", function () {
-        serverArray.sort(dynamicSort("Name"));
+        restaurantArray.sort(dynamicSort("Name"));
         createList();
         document.location.href = "index.html#ListAll";
     });
 
     document.getElementById("buttonSortPriceRange").addEventListener("click", function () {
-        serverArray.sort(dynamicSort("Price"));
+        restaurantArray.sort(dynamicSort("Price"));
         createList();
         document.location.href = "index.html#ListAll";
     });
@@ -100,16 +100,16 @@ document.addEventListener("DOMContentLoaded", function () {
         //document.getElementById("someID").innerHTML = restaurantID;
 
         // next step to avoid bug in jQuery Mobile,  force the movie array to be current
-        serverArray = JSON.parse(localStorage.getItem("restaurantArray"));  
+        restaurantArray = JSON.parse(localStorage.getItem("restaurantArray"));  
 
       // no longer using pointer -1 now that we have real keys
-      document.getElementById("oneName").innerHTML = "Restaurant Name: " + serverArray[localID].Name;
-      document.getElementById("oneCity").innerHTML = "City: " + serverArray[localID].City;
-      document.getElementById("oneState").innerHTML = "State: " + serverArray[localID].State;
-      document.getElementById("oneURL").innerHTML = "Website: " + serverArray[localID].URL;
-      document.getElementById("oneCuisine").innerHTML = "Cuisine: " + serverArray[localID].Cuisine
-      document.getElementById("onePrice").innerHTML = "Price: " + serverArray[localID].Price;
-      document.getElementById("oneURL").innerHTML = serverArray[localID].URL;
+      document.getElementById("oneName").innerHTML = "Restaurant Name: " + restaurantArray[localID].Name;
+      document.getElementById("oneCity").innerHTML = "City: " + restaurantArray[localID].City;
+      document.getElementById("oneState").innerHTML = "State: " + restaurantArray[localID].State;
+      document.getElementById("oneURL").innerHTML = "Website: " + restaurantArray[localID].URL;
+      document.getElementById("oneCuisine").innerHTML = "Cuisine: " + restaurantArray[localID].Cuisine
+      document.getElementById("onePrice").innerHTML = "Price: " + restaurantArray[localID].Price;
+      document.getElementById("oneURL").innerHTML = restaurantArray[localID].URL;
     });
  
 // end of page before show code *************************************************************************
@@ -132,11 +132,11 @@ function createList() {
     // refresh serverArray from the server's serverArray
     $.get("/getAllRestaurants", function(data, status){    //AJAX get
         console.log(status);
-        serverArray = data;                 // copy returned to server json data 
+        restaurantArray = data;                 // copy returned to server json data 
     // });
 
         let ul = document.createElement('ul');
-        serverArray.forEach(function (element,) {   // use handy array forEach method
+        restaurantArray.forEach(function (element,) {   // use handy array forEach method
             let li = document.createElement('li');
             // adding a class name to each one as a way of creating a collection
             li.classList.add('oneRestaurant'); 
@@ -160,7 +160,7 @@ function createList() {
             localStorage.setItem('parm', parm);
             // but also, to get around a "bug" in jQuery Mobile, take a snapshot of the
             // current movie array and save it to localStorage as well.
-            let stringRestaurantArray = JSON.stringify(serverArray); // convert array to "string"
+            let stringRestaurantArray = JSON.stringify(restaurantArray); // convert array to "string"
             localStorage.setItem('restaurantArray', stringRestaurantArray);
             // now jump to our page that will use that one item
             document.location.href = "index.html#details";
@@ -196,10 +196,10 @@ function deleteRestaurant(which) {
 
 // cycles thru the array to find the array element with a matching ID
 function GetArrayPointer(localID) {
-    console.log(serverArray);
+    console.log(restaurantArray);
     console.log(localID);
-    for (let i = 0; i < serverArray.length; i++) {
-        if (localID === serverArray[i].ID) {
+    for (let i = 0; i < restaurantArray.length; i++) {
+        if (localID === restaurantArray[i].ID) {
             return i;
         }
     }
