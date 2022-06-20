@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("buttonAdd").addEventListener("click", function () {
         let newRestaurant = (new RestaurantObject(document.getElementById("name").value,
         document.getElementById("city").value, 
-        document.getElementById("state".value,
+        document.getElementById("state").value,
         document.getElementById("URL").value,
         selectedCuisine,
-        selectedPrice)));
+        selectedPrice));
 
     
     ///// POST =========    
@@ -50,14 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // document.location.href = "index.html/#ListAll";
     });
 
-    //clear button
-    document.getElementById("buttonClear").addEventListener("click", function () {
-        document.getElementById("name").value = "";
-        document.getElementById("city").value = "";
-        document.getElementById("state").value = "";
-        document.getElementById("URL").value = "";
-    }); 
-
     $(document).bind("change", "#select-cuisine", function (event, ui) {
         selectedCuisine = $('#select-cuisine').val();
     });
@@ -66,23 +58,44 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedPrice = $('#select-priceRange').val();
     });
 
+
+    // CLEAR button
+    document.getElementById("buttonClear").addEventListener("click", function () {
+        document.getElementById("name").value = "";
+        document.getElementById("city").value = "";
+        document.getElementById("state").value = "";
+        document.getElementById("URL").value = "";
+        selectedCuisine = "not selected";
+        selectedPrice = "not selected";
+    }); 
+
+    //DELETE Movie
+    document.getElementById("delete").addEventListener("click", function () {
+        let localParm = localStorage.getItem('parm');  // get the unique key back from the dictionary
+        deleteRestaurant(localParm);
+        createList();  // recreate li list after removing one
+        document.location.href = "index.html#ListAll";  // go back to restaurant list 
+    });
+
+    // SORT by Name
     document.getElementById("buttonSortName").addEventListener("click", function () {
         restaurantArray.sort(dynamicSort("Name"));
         createList();
         document.location.href = "index.html#ListAll";
     });
 
+    // SORT by Price Range
     document.getElementById("buttonSortPriceRange").addEventListener("click", function () {
         restaurantArray.sort(dynamicSort("Price"));
         createList();
         document.location.href = "index.html#ListAll";
     });
 
-    // button on details page to view the youtube video
+    // DETAILS button on details page to view the website
     document.getElementById("website").addEventListener("click", function () {
         window.open(document.getElementById("oneURL").innerHTML);
     });
-// end of add button events ************************************************************************
+// end of ADD button events ************************************************************************
 
   
   
@@ -91,22 +104,20 @@ document.addEventListener("DOMContentLoaded", function () {
         createList();
     });
 
-
-
     // need one for our details page to fill in the info based on the passed in ID
     $(document).on("pagebeforeshow", "#details", function (event) {   
         let restaurantID = localStorage.getItem("parm");  // get the unique key back from the dictionary
         let localID = GetArrayPointer (restaurantID); // map to which array it is
         //document.getElementById("someID").innerHTML = restaurantID;
 
-        // next step to avoid bug in jQuery Mobile,  force the movie array to be current
+        // next step to avoid bug in jQuery Mobile,  force the restaurant array to be current
         restaurantArray = JSON.parse(localStorage.getItem("restaurantArray"));  
 
       // no longer using pointer -1 now that we have real keys
-      document.getElementById("oneName").innerHTML = "Restaurant Name: " + restaurantArray[localID].Name;
+      document.getElementById("oneName").innerHTML = "Restaurant Name: " +restaurantArray[localID].Name;
       document.getElementById("oneCity").innerHTML = "City: " + restaurantArray[localID].City;
       document.getElementById("oneState").innerHTML = "State: " + restaurantArray[localID].State;
-      document.getElementById("oneURL").innerHTML = "Website: " + restaurantArray[localID].URL;
+    //   document.getElementById("oneURL").innerHTML = "Website: " + restaurantArray[localID].URL;
       document.getElementById("oneCuisine").innerHTML = "Cuisine: " + restaurantArray[localID].Cuisine
       document.getElementById("onePrice").innerHTML = "Price: " + restaurantArray[localID].Price;
       document.getElementById("oneURL").innerHTML = restaurantArray[localID].URL;
@@ -173,7 +184,7 @@ function createList() {
 
 // end of the get call "call back" function
 
-// remove a restaurant from array
+// DELETE a restaurant from array
 function deleteRestaurant(which) {
     console.log(which);
 // tell the server to remove it from the server
