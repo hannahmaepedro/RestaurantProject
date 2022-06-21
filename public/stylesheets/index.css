@@ -41,7 +41,8 @@ li {
     font-weight:    bold;
   }
 
-/* #nav_bar ul li a.active-page
+#navbar ul li a.active-page
 {
-  background-color: 
-} */
+  font-size: 15px;
+  font-weight: bold;
+}
