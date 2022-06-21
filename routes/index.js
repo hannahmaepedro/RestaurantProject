@@ -32,7 +32,6 @@ router.get('/getAllRestaurants', function(req, res) {
 /*  ADD one new restaurant */
 router.post('/AddRestaurant', function(req, res) {
   const newRestaurant = req.body;
-  newRestaurant.ID = lastID++;
   serverArray.push(newRestaurant);
   res.status(200).json(newRestaurant);
 });

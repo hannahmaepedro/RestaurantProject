@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
     //Add Restaurant info
     document.getElementById("buttonAdd").addEventListener("click", function () {
         let newRestaurant = (new RestaurantObject(document.getElementById("name").value,
-        document.getElementById("city").value, 
-        document.getElementById("state").value,
-        document.getElementById("URL").value,
-        selectedCuisine,
-        selectedPrice));
+            document.getElementById("city").value, 
+            document.getElementById("state").value,
+            document.getElementById("URL").value,
+            selectedCuisine,
+            selectedPrice));
 
     
     ///// POST =========    
@@ -41,23 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
             data: JSON.stringify(newRestaurant),
             contentType : "application/json; charset=utf-8",
             dataType    : "json",
-            success : function(result) {
-                console.log(result);
-                document.location.href = "index.html/#ListAll";
+                success : function (result) {
+                    console.log(result);
+                    document.location.href = "index.html/#ListAll";
             }
         });
 
         // document.location.href = "index.html/#ListAll";
     });
-
-    $(document).bind("change", "#select-cuisine", function (event, ui) {
-        selectedCuisine = $('#select-cuisine').val();
-    });
-   
-    $(document).bind("change", "#select-priceRange", function (event, ui) {
-        selectedPrice = $('#select-priceRange').val();
-    });
-
 
     // CLEAR button
     document.getElementById("buttonClear").addEventListener("click", function () {
@@ -68,6 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedCuisine = "not selected";
         selectedPrice = "not selected";
     }); 
+
+    $(document).bind("change", "#select-cuisine", function (event, ui) {
+        selectedCuisine = $('#select-cuisine').val();
+    });
+   
+    $(document).bind("change", "#select-priceRange", function (event, ui) {
+        selectedPrice = $('#select-priceRange').val();
+    });
+
 
     //DELETE Movie
     document.getElementById("delete").addEventListener("click", function () {
@@ -140,45 +140,46 @@ function createList() {
     let anotherUl = document.getElementById("myUl");
     anotherUl.innerHTML = "";
 
-    // refresh serverArray from the server's serverArray
-    $.get("/getAllRestaurants", function(data, status){    //AJAX get
-        console.log(status);
-        restaurantArray = data;                 // copy returned to server json data 
-    // });
+        // refresh serverArray from the server's serverArray
+        $.get("/getAllRestaurants", function(data, status){    //AJAX get
+            console.log(status);
+            restaurantArray = data;                 // copy returned to server json data 
+        // });
 
-        let ul = document.createElement('ul');
-        restaurantArray.forEach(function (element,) {   // use handy array forEach method
-            let li = document.createElement('li');
-            // adding a class name to each one as a way of creating a collection
-            li.classList.add('oneRestaurant'); 
-            // use the html5 "data-parm" to encode the ID of this particular data object
-            // that we are building an li from
-            li.setAttribute("data-parm", element.ID);
-            li.innerHTML = element.ID + "  || " + element.Name + "  ||  " + element.Price;
-            ul.appendChild(li);
-        });
-        mustVisitList.appendChild(ul)
-
-        // now we have the HTML done to display out list, 
-        // next we make them active buttons
-        // set up an event for each new li item, 
-        let liArray = document.getElementsByClassName("oneRestaurant");
-        Array.from(liArray).forEach(function (element) {
-            element.addEventListener('click', function () {
-            // get that data-parm we added for THIS particular li as we loop thru them
-            let parm = this.getAttribute("data-parm");  // passing in the record.Id
-            // get our hidden <p> and save THIS ID value in the localStorage "dictionairy"
-            localStorage.setItem('parm', parm);
-            // but also, to get around a "bug" in jQuery Mobile, take a snapshot of the
-            // current movie array and save it to localStorage as well.
-            let stringRestaurantArray = JSON.stringify(restaurantArray); // convert array to "string"
-            localStorage.setItem('restaurantArray', stringRestaurantArray);
-            // now jump to our page that will use that one item
-            document.location.href = "index.html#details";
+            let ul = document.createElement('ul');
+            restaurantArray.forEach(function (element,) {   // use handy array forEach method
+                let li = document.createElement('li');
+                // adding a class name to each one as a way of creating a collection
+                li.classList.add('oneRestaurant'); 
+                // use the html5 "data-parm" to encode the ID of this particular data object
+                // that we are building an li from
+                li.setAttribute("data-parm", element.ID);
+                li.innerHTML = element.ID + "  || " + element.Name + "  ||  " + element.Price;
+                ul.appendChild(li);
             });
-        });
+            mustVisitList.appendChild(ul)
 
-});
+            // now we have the HTML done to display out list, 
+            // next we make them active buttons
+            // set up an event for each new li item, 
+            let liArray = document.getElementsByClassName("oneRestaurant");
+            Array.from(liArray).forEach(function (element) {
+                element.addEventListener('click', function () {
+                    // get that data-parm we added for THIS particular li as we loop thru them
+                    let parm = this.getAttribute("data-parm");  // passing in the record.Id
+                    // get our hidden <p> and save THIS ID value in the localStorage "dictionary"
+                
+                    localStorage.setItem('parm', parm);
+                    // but also, to get around a "bug" in jQuery Mobile, take a snapshot of the
+                    // current movie array and save it to localStorage as well.
+                    let stringRestaurantArray = JSON.stringify(restaurantArray); // convert array to "string"
+                    localStorage.setItem('restaurantArray', stringRestaurantArray);
+                    // now jump to our page that will use that one item
+                    document.location.href = "index.html#details";
+                });
+            });
+
+    });
 
 };
 
