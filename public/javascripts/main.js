@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("oneCity").innerHTML = "City: " + restaurantArray[localID].City;
       document.getElementById("oneState").innerHTML = "State: " + restaurantArray[localID].State;
     //   document.getElementById("oneURL").innerHTML = "Website: " + restaurantArray[localID].URL;
-      document.getElementById("oneCuisine").innerHTML = "Cuisine: " + restaurantArray[localID].Cuisine
+      document.getElementById("oneCuisine").innerHTML = "Cuisine: " + restaurantArray[localID].Cuisine;
       document.getElementById("onePrice").innerHTML = "Price: " + restaurantArray[localID].Price;
       document.getElementById("oneURL").innerHTML = restaurantArray[localID].URL;
     });
