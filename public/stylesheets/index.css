@@ -7,7 +7,7 @@ h1 {
 }
 
 body {
-    font-family: 'Courier New';
+    font-family:'Courier New', Courier, monospace;
     text-align: center;
     font-size: 2em;
 }
@@ -30,3 +30,7 @@ body {
     width: 25%;
 }
 
+.nav-bar {
+    font-family:'Courier New', Courier, monospace;
+    size: 15px;
+}
