@@ -34,3 +34,14 @@ body {
     font-family:'Courier New', Courier, monospace;
     size: 15px;
 }
+
+li {
+    color:chocolate;
+    font-size:      25px;
+    font-weight:    bold;
+  }
+
+/* #nav_bar ul li a.active-page
+{
+  background-color: 
+} */
